@@ -1,0 +1,82 @@
+trigger:
+  - dev
+  - master
+
+variables:
+  - group: docker-credentials
+  - group: kubernetes-config
+  - name: imageName
+    value: 'your-dockerhub-username/spring-boot-app'
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Gradle@2
+      inputs:
+        workingDirectory: ''
+        gradleWrapperFile: 'gradlew'
+        gradleOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: 'build'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerHub'
+        repository: $(imageName)
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
+
+- stage: DeployToDev
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
+  jobs:
+  - deployment: DeployToAKS
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'development'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              namespace: 'default'
+              manifests: |
+                $(Pipeline.Workspace)/k8s/dev/*.yml
+              imagePullSecrets: |
+                dockerauth
+              containers: |
+                $(imageName):$(Build.BuildId)
+
+- stage: DeployToProd
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: DeployToAKS
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Kubernetes@1
+            inputs:
+              connectionType: 'Kubernetes Service Connection'
+              namespace: 'default'
+              manifests: |
+                $(Pipeline.Workspace)/k8s/prod/*.yml
+              imagePullSecrets: |
+                dockerauth
+              containers: |
+                $(imageName):$(Build.BuildId)
