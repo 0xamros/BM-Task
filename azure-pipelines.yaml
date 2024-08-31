@@ -32,7 +32,7 @@ stages:
         containerRegistry: 'DockerHub'
         repository: $(imageName)
         command: 'buildAndPush'
-        Dockerfile: '**/dockerfile'
+        Dockerfile: '**/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
