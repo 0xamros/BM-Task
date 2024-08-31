@@ -6,7 +6,7 @@ variables:
   - group: docker-credentials
   - group: kubernetes-config
   - name: imageName
-    value: 'your-dockerhub-username/spring-boot-app'
+    value: 'azi1iz/bm-task'
 
 stages:
 - stage: Build
@@ -32,7 +32,7 @@ stages:
         containerRegistry: 'DockerHub'
         repository: $(imageName)
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '**/dockerfile'
         tags: |
           $(Build.BuildId)
           latest
