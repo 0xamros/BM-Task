@@ -60,8 +60,8 @@ stages:
         steps:
           - task: Docker@2
             inputs:
-              containerRegistry: 'yourDockerRegistryServiceConnection'
-              repository: 'your-image-name'
+              containerRegistry: 'DockerHubServiceConnection'
+              repository: 'bm'
               command: 'build'
               Dockerfile: '**/Dockerfile'
               tags: '$(Build.BuildId)'
@@ -77,7 +77,7 @@ stages:
         steps:
           - task: Docker@2
             inputs:
-              containerRegistry: 'yourDockerRegistryServiceConnection'
+              containerRegistry: 'DockerHubServiceConnection'
               repository: 'your-image-name'
               command: 'push'
               tags: '$(Build.BuildId)'
