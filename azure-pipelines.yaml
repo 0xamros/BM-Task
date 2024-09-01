@@ -31,24 +31,24 @@ stages:
               ./gradlew test
             displayName: 'Run Unit Tests'
 
-  - stage: SonarQube
-    displayName: SonarQube Stage
-    dependsOn: UnitTest
-    jobs:
-      - job: SonarQubeJob
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - task: SonarQubePrepare@4
-            inputs:
-              SonarQube: 'SonarQubeServiceEndpoint'
-              scannerMode: 'CLI'
-              configMode: 'manual'
-              cliProjectKey: 'your-project-key'
-              cliProjectName: 'your-project-name'
-          - script: |
-              ./gradlew sonarqube
-            displayName: 'Run SonarQube Analysis'
+  # - stage: SonarQube
+  #   displayName: SonarQube Stage
+  #   dependsOn: UnitTest
+  #   jobs:
+  #     - job: SonarQubeJob
+  #       pool:
+  #         vmImage: 'ubuntu-latest'
+  #       steps:
+  #         - task: SonarQubePrepare@4
+  #           inputs:
+  #             SonarQube: 'SonarQubeServiceEndpoint'
+  #             scannerMode: 'CLI'
+  #             configMode: 'manual'
+  #             cliProjectKey: 'your-project-key'
+  #             cliProjectName: 'your-project-name'
+  #         - script: |
+  #             ./gradlew sonarqube
+  #           displayName: 'Run SonarQube Analysis'
 
   - stage: BuildImage
     displayName: Build Image Stage
