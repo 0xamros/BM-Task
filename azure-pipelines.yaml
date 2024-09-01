@@ -10,7 +10,8 @@ stages:
     jobs:
       - job: LintJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Running lint checks..."
@@ -24,7 +25,8 @@ stages:
     jobs:
       - job: UnitTestJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Running unit tests..."
@@ -56,7 +58,8 @@ stages:
     jobs:
       - job: BuildImageJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - task: Docker@2
             inputs:
@@ -73,12 +76,13 @@ stages:
     jobs:
       - job: PushImageJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - task: Docker@2
             inputs:
               containerRegistry: 'DockerHubServiceConnection'
-              repository: 'your-image-name'
+              repository: 'bm'
               command: 'push'
               tags: '$(Build.BuildId)'
             displayName: 'Push Docker Image to Registry'
@@ -89,10 +93,11 @@ stages:
     jobs:
       - job: PullImageJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
-              docker pull your-docker-registry/your-image-name:$(Build.BuildId)
+              docker pull amrosy2020/bm:$(Build.BuildId)
             displayName: 'Pull Docker Image from Registry'
 
   - stage: DeployToK8s
@@ -101,7 +106,8 @@ stages:
     jobs:
       - job: DeployToK8sJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Deploying to Kubernetes..."
@@ -115,7 +121,8 @@ stages:
     jobs:
       - job: CreateIngressJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Creating Ingress..."
@@ -128,7 +135,8 @@ stages:
     jobs:
       - job: DeployDevEnvJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Deploying to Development Environment..."
@@ -141,7 +149,8 @@ stages:
     jobs:
       - job: DeployProdEnvJob
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          name: amr
         steps:
           - script: |
               echo "Deploying to Production Environment..."
