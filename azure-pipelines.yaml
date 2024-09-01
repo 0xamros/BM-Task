@@ -52,7 +52,7 @@ stages:
 
   - stage: BuildImage
     displayName: Build Image Stage
-    dependsOn: SonarQube
+    # dependsOn: SonarQube
     jobs:
       - job: BuildImageJob
         pool:
