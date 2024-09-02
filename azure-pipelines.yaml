@@ -66,7 +66,7 @@ stages:
               containerRegistry: 'DockerHubServiceConnection'
               repository: 'bm'
               command: 'build'
-              Dockerfile: '**/Dockerfile'
+              Dockerfile: '**/dockerfile'
               tags: '$(Build.BuildId)'
             displayName: 'Build Docker Image'
 
