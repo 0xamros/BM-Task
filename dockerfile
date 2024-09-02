@@ -10,9 +10,9 @@ COPY gradle gradle
 
 # Copy the source code
 COPY src src
-
+USER 0
 # Build the application
-RUN sudo ./gradlew build
+RUN  ./gradlew build
 
 # Use a smaller base image for the runtime
 FROM openjdk:11-jre-slim
