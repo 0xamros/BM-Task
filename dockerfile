@@ -10,7 +10,7 @@ COPY gradle gradle
 
 # Copy the source code
 COPY src src
-USER 0
+RUN chmod +x ./gradlew   
 # Build the application
 RUN  ./gradlew build
 
