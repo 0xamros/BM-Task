@@ -112,8 +112,8 @@ stages:
           - script: |
               echo "Deploying to Kubernetes..."
               
-              kubectl apply -f k8s/deployment.yaml --write-kubeconfig-mode
-              kubectl apply -f k8s/service.yaml --write-kubeconfig-mode
+              kubectl apply -f k8s/deployment.yaml 
+              kubectl apply -f k8s/service.yaml 
             displayName: 'Deploy to Kubernetes'
 
   - stage: CreateIngress
@@ -127,7 +127,7 @@ stages:
         steps:
           - script: |
               echo "Creating Ingress..."
-              kubectl apply -f k8s/ingress.yaml --write-kubeconfig-mode
+              kubectl apply -f k8s/ingress.yaml 
             displayName: 'Create Ingress for Application'
 
   - stage: DeployDevEnv
