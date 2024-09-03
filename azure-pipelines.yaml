@@ -10,7 +10,7 @@ stages:
     jobs:
       - job: LintJob
         pool:
-          # vmImage: 'ubuntu-latest'
+          #  vmImage: 'ubuntu-latest'
           name: amr
         steps:
           - script: |
