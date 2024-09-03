@@ -26,9 +26,6 @@ The main objectives of this challenge were to:
 
 ## Solution Architecture
 
-
-Try this markdown:
-
 ![alt text](./bm-task-cicd-drawio.drawio.svg)
 
 
@@ -68,7 +65,6 @@ The CI/CD pipeline is implemented in Azure DevOps using YAML. Key features inclu
 - Approval gates for production deployments
 - Automated rollback mechanism in case of deployment failures
 
-[Include a snippet or link to your pipeline YAML file]
 
 ## Kubernetes Deployment
 
@@ -77,7 +73,6 @@ Kubernetes manifests includes:
 - Services for internal communication
 - Ingress resources for external access
 
-[Include a snippet or link to your Helm chart]
 
 ## Additional Features
 
