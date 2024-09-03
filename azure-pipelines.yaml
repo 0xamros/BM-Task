@@ -52,6 +52,7 @@ stages:
               cliProjectKey: 'test_test_AZG3zc3AelO5QjdSCneY'
               cliProjectName: test'
           - script: |
+              sudo chmod +x ./gradlew
               ./gradlew sonarqube
             displayName: 'Run SonarQube Analysis'
 
