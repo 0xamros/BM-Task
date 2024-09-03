@@ -142,7 +142,9 @@ stages:
         steps:
           - script: |
               echo "Deploying to Development Environment..."
-              # Add deployment steps specific to your development environment
+              kubectl apply -f k8s/deployment.yaml --namespace dev
+              kubectl apply -f k8s/service.yaml --namespace dev
+              kubectl set image deployment/spring-boot-app spring-boot-app=amrosy2020/bm:$(Build.BuildId) --namespace dev
             displayName: 'Deploy to Development Environment'
 
   - stage: DeployProdEnv
@@ -156,5 +158,7 @@ stages:
         steps:
           - script: |
               echo "Deploying to Production Environment..."
-              # Add deployment steps specific to your production environment
+              kubectl apply -f k8s/deployment.yaml --namespace prod
+              kubectl apply -f k8s/service.yaml --namespace prod
+              kubectl set image deployment/spring-boot-app spring-boot-app=amrosy2020/bm:$(Build.BuildId) --namespace prod
             displayName: 'Deploy to Production Environment'
