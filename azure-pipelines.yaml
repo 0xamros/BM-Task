@@ -15,7 +15,7 @@ stages:
         steps:
           - script: |
               echo "Running lint checks..."
-              # Replace with the appropriate lint command for your project
+              # Replace  with the appropriate lint command for your project
               sudo chmod +x ./gradlew
               ./gradlew checkstyleMain checkstyleTest
             displayName: 'Run Lint Checks'
