@@ -31,6 +31,7 @@ stages:
         steps:
           - script: |
               echo "Running unit tests..."
+              sudo chmod +x ./gradlew
               ./gradlew test
             displayName: 'Run Unit Tests'
 
