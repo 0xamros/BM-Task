@@ -8,7 +8,6 @@
 - [CI/CD Pipeline](#cicd-pipeline)
 - [Kubernetes Deployment](#kubernetes-deployment)
 - [Additional Features](#additional-features)
-- [Running the Solution](#running-the-solution)
 - [Future Improvements](#future-improvements)
 - [Conclusion](#conclusion)
 
@@ -27,7 +26,11 @@ The main objectives of this challenge were to:
 
 ## Solution Architecture
 
-[Insert your architecture diagram here]
+
+Try this markdown:
+
+![alt text](./bm-task-cicd-drawio.drawio.svg)
+
 
 The solution architecture consists of the following components:
 - Version Control: GitHub
